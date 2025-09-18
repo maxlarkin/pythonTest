@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Path
 from fastapi.responses import HTMLResponse, FileResponse
 
 app = FastAPI()
@@ -13,7 +13,7 @@ def getFile():
     return FileResponse('.gitignore')
 
 @app.get('/ids/{id}')
-def getID(id: int):
+def getID(id: int = Path(le = 100, gt=0)):
     return HTMLResponse('<h1>Your id is: ' + str(id) + '</h1>')
 
 '''pip unistall -r -f requirements.txt'''
