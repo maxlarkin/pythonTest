@@ -10,7 +10,7 @@ def root():
 
 @app.get('/file', response_class=FileResponse)
 def getFile():
-    return FileResponse('./.gitignore')
+    return FileResponse('.gitignore')
 
 
 '''pip unistall -r -f requirements.txt'''
