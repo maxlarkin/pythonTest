@@ -12,6 +12,9 @@ def root():
 def getFile():
     return FileResponse('.gitignore')
 
+@app.get('/ids/{id}')
+def getID(id):
+    return HTMLResponse('<h1>Your id is: ' + str(id) + '</h1>')
 
 '''pip unistall -r -f requirements.txt'''
 '''uvicorn main:app --reload'''
