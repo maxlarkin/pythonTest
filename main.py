@@ -16,8 +16,8 @@ def getFile():
 def getID(id: int = Path(le = 100, gt=0)):
     return HTMLResponse('<h1>Your id is: ' + str(id) + '</h1>')
 
-@app.get('/user')
-def getUser(name: str = Query(default = 'Undefined', max_length=100, min_length=0), 
+@app.get('/users/{name}')
+def getUser(name: str = Path(min_length=2, max_length=100), 
             lastname: str = Query(default = 'Undefined', max_length=100, min_length=0)):
     return HTMLResponse('<h1>' + name + ' ' + lastname + '</h1>')
 
