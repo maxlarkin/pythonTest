@@ -17,7 +17,7 @@ def getID(id: int = Path(le = 100, gt=0)):
     return HTMLResponse('<h1>Your id is: ' + str(id) + '</h1>')
 
 @app.get('/user')
-def getUser(name: str, lastname: str):
+def getUser(name: str = 'Undefined', lastname: str = 'Undefined'):
     return HTMLResponse('<h1>' + name + ' ' + lastname + '</h1>')
 
 '''pip unistall -r -f requirements.txt'''
