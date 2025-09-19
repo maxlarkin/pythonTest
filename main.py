@@ -17,7 +17,8 @@ def getID(id: int = Path(le = 100, gt=0)):
     return HTMLResponse('<h1>Your id is: ' + str(id) + '</h1>')
 
 @app.get('/user')
-def getUser(name: str = Query(max_length=100, min_length=0), lastname: str = 'Undefined'):
+def getUser(name: str = Query(default = 'Undefined', max_length=100, min_length=0), 
+            lastname: str = Query(default = 'Undefined', max_length=100, min_length=0)):
     return HTMLResponse('<h1>' + name + ' ' + lastname + '</h1>')
 
 '''pip unistall -r -f requirements.txt'''
