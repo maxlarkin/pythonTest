@@ -8,6 +8,10 @@ def root():
     response = '<h1>Hello, world!</h1>'
     return HTMLResponse(content=response)
 
+@app.get('/notFound', status_code=404)
+def notFound():
+    return HTMLResponse('<h1>Page is not found</h1>')
+
 @app.get('/file', response_class=FileResponse)
 def getFile():
     return FileResponse('.gitignore')
