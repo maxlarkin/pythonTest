@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Path, Query
+from fastapi import FastAPI, Path, Query, status
 from fastapi.responses import HTMLResponse, FileResponse
 
 app = FastAPI()
@@ -8,7 +8,7 @@ def root():
     response = '<h1>Hello, world!</h1>'
     return HTMLResponse(content=response)
 
-@app.get('/notFound', status_code=404)
+@app.get('/notFound', status_code=status.HTTP_404_NOT_FOUND)
 def notFound():
     return HTMLResponse('<h1>Page is not found</h1>')
 
