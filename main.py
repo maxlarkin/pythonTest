@@ -21,5 +21,9 @@ def getUser(name: str = Query(default = 'Undefined', max_length=100, min_length=
             lastname: str = Query(default = 'Undefined', max_length=100, min_length=0)):
     return HTMLResponse('<h1>' + name + ' ' + lastname + '</h1>')
 
+@app.get('/people')
+def getPeople(people: list[str] = Query()):
+    return people
+
 '''pip unistall -r -f requirements.txt'''
 '''uvicorn main:app --reload'''
