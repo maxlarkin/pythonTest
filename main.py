@@ -1,16 +1,20 @@
 from fastapi import FastAPI, Path, Query, status
-from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
 
 app = FastAPI()
 
 @app.get('/')
 def root():
+    return RedirectResponse('/home')
+
+@app.get('/home')
+def home():
     response = '<h1>Hello, world!</h1>'
     return HTMLResponse(content=response)
 
-@app.get('/notFound', status_code=status.HTTP_404_NOT_FOUND)
+@app.get('/notFound')
 def notFound():
-    return HTMLResponse('<h1>Page is not found</h1>')
+    return HTMLResponse('<h1>Page is not found</h1>', status_code=status.HTTP_404_NOT_FOUND)
 
 @app.get('/file', response_class=FileResponse)
 def getFile():
