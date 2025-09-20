@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Path, Query, status
+from fastapi import FastAPI, Body
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -6,35 +6,11 @@ app = FastAPI()
 
 @app.get('/')
 def root():
-    return RedirectResponse('/home')
+    return FileResponse('public/index.html')
 
-app.mount('/static', StaticFiles(directory='./public', html=True))
-
-@app.get('/home')
-def home():
-    response = '<h1>Hello, world!</h1>'
-    return HTMLResponse(content=response)
-
-@app.get('/notFound')
-def notFound():
-    return HTMLResponse('<h1>Page is not found</h1>', status_code=status.HTTP_404_NOT_FOUND)
-
-@app.get('/file', response_class=FileResponse)
-def getFile():
-    return FileResponse('.gitignore')
-
-@app.get('/ids/{id}')
-def getID(id: int = Path(le = 100, gt=0)):
-    return HTMLResponse('<h1>Your id is: ' + str(id) + '</h1>')
-
-@app.get('/users/{name}')
-def getUser(name: str = Path(min_length=2, max_length=100), 
-            lastname: str = Query(default = 'Undefined', max_length=100, min_length=0)):
-    return HTMLResponse('<h1>' + name + ' ' + lastname + '</h1>')
-
-@app.get('/people')
-def getPeople(people: list[str] = Query()):
-    return people
+@app.post('/api/users')
+def userInfo(data = Body()):
+    return {'message': f'user: {data["name"]} {data["lastname"]}'}
 
 '''pip unistall -r -f requirements.txt'''
 '''uvicorn main:app --reload'''
