@@ -1,11 +1,14 @@
 from fastapi import FastAPI, Path, Query, status
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
 @app.get('/')
 def root():
     return RedirectResponse('/home')
+
+app.mount('/static', StaticFiles(directory='./public', html=True))
 
 @app.get('/home')
 def home():
