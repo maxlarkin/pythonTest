@@ -7,7 +7,7 @@ app = FastAPI()
 
 class TempRequest(BaseModel):
     name: str
-    lastname: str
+    lastname: str = 'Undefined'
 
 @app.get('/')
 def root():
