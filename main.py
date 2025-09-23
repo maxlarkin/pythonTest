@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 app = FastAPI()
-'''daily commit 2'''
+'''daily commit 3'''
 class TempRequest(BaseModel):
     name: str
     lastname: str = 'Undefined'
