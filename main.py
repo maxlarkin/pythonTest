@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 app = FastAPI()
-'''daily commit 6'''
+
 class TempRequest(BaseModel):
     name: str
     lastname: str = 'Undefined'
@@ -15,7 +15,7 @@ def root():
 
 @app.post('/api/users')
 def userInfo(user: TempRequest):
-    return {'message': f'user: {user.name} {user.lastname}'}
+    return {'message': f'user: 25 {user.name} {user.lastname}'}
 
 '''pip unistall -r -f requirements.txt'''
 '''uvicorn main:app --reload'''
