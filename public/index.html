@@ -16,6 +16,10 @@
         <div class="listUsers">
             <ul id="ulOfUsers"></ul>
         </div>
+        <div class="findUser">
+            <input type="number" name="findId" id="findId" oninput="findUser()">
+            <span id="userIdField"></span>
+        </div>
     </div>
     <div class="footer">
         <h2>Site Footer</h2>
@@ -38,6 +42,22 @@
                     ulOfUsers = document.getElementById('ulOfUsers')
                     ulOfUsers.innerHTML = lis.join('')
                 })
+        }
+
+        async function findUser() {
+            id = document.getElementById('findId').value
+            findIdSpan = document.getElementById('userIdField')
+            fetch(
+                `/api/users/${id}`, {
+                    method: 'GET', 
+                    headers: {'Content-Type': 'application/json'}
+                }
+            ).then(async (response) => {
+                res = await response.json()
+                if (res.id && res.name && res.lastname) {
+                    findIdSpan.innerHTML = `id: ${res.id}, lastname: ${res.lastname}, name: ${res.name}`
+                } else findIdSpan.innerHTML = 'User not found'
+            })
         }
 
     </script>
