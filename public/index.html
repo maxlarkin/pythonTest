@@ -7,36 +7,7 @@
 </head>
 <body>
     
-    <div class="container">
-        <div id="message"></div>
-        <p><input type="text" id="name" name="name"></p>
-        <p><input type="text" id="lastname" name="lastname"></p>
-        <button onclick=send()>send</button>
-    </div>
-    <h1>This is a static file</h1>
-
-    <script>
-        async function send() {
-            let name = document.getElementById('name').value
-            let lastname = document.getElementById('lastname').value
-            let messageElement = document.getElementById('message')
-
-            fetch('api/users', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: name, 
-                    // lastname: lastname
-                }),
-            }).then(async response => {
-                const data = await response.json()
-                messageElement.textContent = data.message
-            }).catch((error) => {console.log(error)})
-    }
-    </script>
+    
 
 </body>
 </html>
