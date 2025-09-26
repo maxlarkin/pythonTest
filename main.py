@@ -2,11 +2,11 @@ from fastapi import FastAPI, Path
 from fastapi.responses import FileResponse
 
 users = [
-    {'id': 1, 'name': 'maxim', 'lastname': 'larkin'},
-    {'id': 2, 'name': 'oleg', 'lastname': 'samoylov'},
-    {'id': 3, 'name': 'andrey', 'lastname': 'mihalenko'},
-    {'id': 4, 'name': 'sergey', 'lastname': 'petov'},
-    {'id': 5, 'name': 'kirill', 'lastname': 'gulev'}
+    {'id': 1, 'name': 'Максим', 'lastname': 'Ларкин'},
+    {'id': 2, 'name': 'Олег', 'lastname': 'Самойлов'},
+    {'id': 3, 'name': 'Андрей', 'lastname': 'Михаленко'},
+    {'id': 4, 'name': 'Сергей', 'lastname': 'Петов'},
+    {'id': 5, 'name': 'Кирилл', 'lastname': 'Гулев'}
 ]
 
 

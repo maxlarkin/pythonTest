@@ -3,11 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index.html</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>test site</title>
 </head>
 <body>
     
-    
+    <div class="header">
+        <h2>Site Header</h2>
+    </div>
+    <div class="content">
+        <button onclick="showUsers()">Show Users</button>
+        <div class="listUsers">
+            <ul id="ulOfUsers"></ul>
+        </div>
+    </div>
+    <div class="footer">
+        <h2>Site Footer</h2>
+    </div>
+
+    <script>
+        async function showUsers() {
+            lis = []
+            fetch(
+                '/api/users', {
+                    method: 'GET', 
+                    headers: {'Content-Type': 'application/json'}}
+                ).then(async (response) => {
+                    response = await response.json()
+                    for (user of response) {
+                        console.log(user)
+                        lis.push(`<li>id: ${user.id}, lastname: ${user.lastname}, name: ${user.name}</li>`)
+                    }
+                    
+                    ulOfUsers = document.getElementById('ulOfUsers')
+                    ulOfUsers.innerHTML = lis.join('')
+                })
+        }
+
+    </script>
 
 </body>
 </html>
