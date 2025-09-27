@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Body
 from fastapi.responses import FileResponse
 
 users = [
@@ -30,3 +30,12 @@ def get_users():
 def get_user(id: str):
     res = find_user(id)
     return res if res != None else 'User not found'
+
+@app.put('/api/users')
+def update_user(data = Body()):
+    user = find_user(data['id'])
+    if user != None:
+        user['name'] = data['name'] 
+        user['lastname'] = data['lastname']   
+        return user
+    return 'User not found'
