@@ -6,7 +6,8 @@ users = [
     {'id': 2, 'name': 'Олег', 'lastname': 'Самойлов'},
     {'id': 3, 'name': 'Андрей', 'lastname': 'Михаленко'},
     {'id': 4, 'name': 'Сергей', 'lastname': 'Петов'},
-    {'id': 5, 'name': 'Кирилл', 'lastname': 'Гулев'}
+    {'id': 5, 'name': 'Кирилл', 'lastname': 'Гулев'},
+    {'id': 6, 'name': 'Форве', 'lastname': 'Эмперрор'}
 ]
 
 
