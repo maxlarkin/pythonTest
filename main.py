@@ -10,7 +10,7 @@ users = [
     {'id': 6, 'name': 'Антон', 'lastname': 'Мерин'},
     {'id': 7, 'name': 'Форве', 'lastname': 'Эмперрор'}
 ]
-
+#Идет 2 (3) день быссмысленного коммита
 
 def find_user(id: str):
     for user in users:
