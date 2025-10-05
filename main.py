@@ -1,15 +1,17 @@
+import uuid
 from fastapi import FastAPI, Body
 from fastapi.responses import FileResponse
 
-users = [
-    {'id': 1, 'name': 'Максим', 'lastname': 'Ларкин'},
-    {'id': 2, 'name': 'Олег', 'lastname': 'Самойлов'},
-    {'id': 3, 'name': 'Андрей', 'lastname': 'Михаленко'},
-    {'id': 4, 'name': 'Сергей', 'lastname': 'Петов'},
-    {'id': 5, 'name': 'Кирилл', 'lastname': 'Гулев'},
-    {'id': 6, 'name': 'Антон', 'lastname': 'Мерин'},
-    {'id': 7, 'name': 'Форве', 'lastname': 'Эмперрор'}
-]
+class User:
+    def __init__(self, name, lastname):
+        self.id = str(uuid.uuid4())
+        self.name = name
+        self.lastname = lastname
+
+users = [User('Максим', 'Ларкин'), User('Олег', 'Самойлов'), 
+         User('Олег', 'Михайленков'), User('Сергей', 'Петов'), 
+         User('Кирилл', 'Гулев'), User('Антон', 'Мерин'), 
+         User('Форве', 'Эмперрор')]
 #Идет 4 (5) день быссмысленного коммита
 
 def find_user(id: str):
