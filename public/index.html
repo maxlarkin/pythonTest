@@ -3,78 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>test python fast api</title>
+    <link rel="stylesheet" href="./styles.css">
+    <title>test python fast api </title>
 </head>
 <body>
     
     <div class="header">
         <h2>Fast api test site Header</h2>
     </div>
+
     <div class="content">
-        <button onclick="showUsers()">Show Users</button>
         <div class="listUsers">
             <ul id="ulOfUsers"></ul>
         </div>
+
         <div class="findUser">
             <input type="number" name="findId" id="findId" oninput="findUser()">
             <span id="userIdField"></span>
         </div>
+
         <form>
             <input type="number" name="changeId" id="changeId">
             <input type="text" name="changeName" id="changeName">
             <input type="text" name="changeLastname" id="changeLastname">
             <button type="button" id="changeForm">Change</button>
         </form>
+
+        <div class="addUser">
+            <label for="newUserName">Name</label>
+            <input type="text" name="newUserName" id="newUserName">
+
+            <label for="newUserLastame">Lastname</label>
+            <input type="text" name="newUserLastname" id="newUserLastname">
+
+            <button type="button" id="addUserButton" onclick="addUser()">Добавить</button>
+            <p id="successAdd"></p>
+        </div>
     </div>
+
     <div class="footer">
         <h2>Site Footer</h2>
     </div>
 
     <script>
 
-        document.getElementById('changeForm').addEventListener('click', changeUser)
+        document.getElementById("changeForm").addEventListener("click", changeUser)
 
         async function showUsers() {
-            lis = []
-            fetch(
-                '/api/users', {
-                    method: 'GET', 
-                    headers: {'Content-Type': 'application/json'}}
-                ).then(async (response) => {
-                    response = await response.json()
-                    for (user of response) {
-                        console.log(user)
-                        lis.push(`<li>id: ${user.id}, lastname: ${user.lastname}, name: ${user.name}</li>`)
-                    }
-                    
-                    ulOfUsers = document.getElementById('ulOfUsers')
-                    ulOfUsers.innerHTML = lis.join('')
-                })
+            // отправляет запрос и получаем ответ
+            const response = await fetch("./api/users", {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            // если запрос прошел нормально
+            if (response.ok === true) {
+                // получаем данные
+                const users = await response.json();
+                console.log(users)
+            }
         }
 
         async function findUser() {
-            id = document.getElementById('findId').value
-            findIdSpan = document.getElementById('userIdField')
+            id = document.getElementById("findId").value
+            findIdSpan = document.getElementById("userIdField")
             fetch(
                 `/api/users/${id}`, {
-                    method: 'GET', 
-                    headers: {'Content-Type': 'application/json'}
+                    method: "GET", 
+                    headers: {"Content-Type": "application/json"}
                 }
             ).then(async (response) => {
                 res = await response.json()
                 if (res.id && res.name && res.lastname) {
                     findIdSpan.innerHTML = `id: ${res.id}, lastname: ${res.lastname}, name: ${res.name}`
-                } else findIdSpan.innerHTML = 'User not found'
+                } else findIdSpan.innerHTML = "User not found"
             })
         }
 
         async function changeUser() {
-            userid = document.getElementById('changeId').value
-            username = document.getElementById('changeName').value
-            userlastname = document.getElementById('changeLastname').value
-            fetch('api/users', {
-                method: 'put',
+            userid = document.getElementById("changeId").value
+            username = document.getElementById("changeName").value
+            userlastname = document.getElementById("changeLastname").value
+            fetch("api/users", {
+                method: "put",
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
                 body: JSON.stringify({
                     id: userid,
@@ -87,6 +97,24 @@
             })
         }
 
+        async function addUser() {
+            name = document.getElementById("newUserName").value
+            lastname = document.getElementById("newUserLastname").value
+
+            fetch("api/users", {
+                method: "post",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: name,
+                    lastname: lastname
+                })
+            }).then(async (response) => {
+                if (response.ok) {
+                    document.getElementById("successAdd").textContent = "Успешно добавлено"
+                }
+            })
+        }
+        showUsers()
     </script>
 
 </body>

@@ -1,5 +1,6 @@
 import uuid
 from fastapi import FastAPI, Body
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
 class User:
@@ -12,8 +13,8 @@ users = [User('Максим', 'Ларкин'), User('Олег', 'Самойло�
          User('Олег', 'Михайленков'), User('Сергей', 'Петов'), 
          User('Кирилл', 'Гулев'), User('Антон', 'Мерин'), 
          User('Форве', 'Эмперрор')]
-#Идет 4 (5) день быссмысленного коммита
-
+#Идет 5 (6) день быссмысленного коммита
+print(users)
 def find_user(id: str):
     for user in users:
         if user['id'] == int(id):
@@ -22,11 +23,13 @@ def find_user(id: str):
 
 app = FastAPI()
 
-@app.get('/')
+# app.mount('/', StaticFiles(directory='public', html=True))
+@app.get("/")
 def index():
-    return FileResponse('public/index.html')
+    return FileResponse("public/index.html", )
 
-@app.get('/api/users')
+
+@app.get("/api/users")
 def get_users():
     return users
 
@@ -43,3 +46,9 @@ def update_user(data = Body()):
         user['lastname'] = data['lastname']   
         return user
     return 'User not found'
+
+@app.post('/api/users')
+def create_user(data = Body()):
+    user = User(data['name'], data['lastname'])
+    users.append(user)
+    return user
